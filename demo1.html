@@ -20,6 +20,10 @@
 </body>
 </html>
   <script>
+    /**
+     * 主文档中设置的字体颜色覆盖了组件中的字体颜色，组件中设置的 body 背景色会影响全局，组件和主文档样式相互影响。
+     * 组件 DOM 没有隔离，主文档中存在两个 ID 为 container 的元素。
+    */
     //  定义组件类
     class UserCard extends HTMLElement {
       constructor () {

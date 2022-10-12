@@ -13,7 +13,7 @@
             --bg-color:#fff
         }
     </style>
-    <my-card></my-card>
+    <my-card id="test"></my-card>
     <input type="text"> 
     <button>点击</button>
 </body>
@@ -25,9 +25,9 @@
     class MyCard extends HTMLElement{
         constructor(){
             super()
-            this.attachShadow({mode:'open'})
+            let root = this.attachShadow({mode:'open'})
 
-            this.shadowRoot.innerHTML =`
+            root.innerHTML =`
                 <div style='width:100px;height:100px;border:1px solid #000;background-color:var(--bg-color)'></div>
             
             `
@@ -36,7 +36,7 @@
 
     }
     customElements.define('my-card', MyCard)
-
+    console.log(document.querySelector('#test').shadowRoot)
     document.querySelector('button').addEventListener('click',()=>{
         let bgColor = document.querySelector('input').value
         document.body.removeChild(document.querySelector('#style'))
