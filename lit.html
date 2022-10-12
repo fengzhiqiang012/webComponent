@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lit的计数</title>
+  </head>
+  <body>
+    <my-counter count="10"></my-counter>
+  </body>
+
+  <script type="module">
+    import {
+      LitElement,
+      html,
+      css
+    } from 'https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js'
+
+    export class Counter extends LitElement {
+      static get properties() {
+        return {
+          count: {},
+        }
+      }
+      static styles = css`
+        .btn {
+            color:red;
+        }
+    `
+      constructor(){
+        super()
+        this.count = this.getAttribute('count')
+      }
+      handleClick(){
+        this.count++
+      }
+      render() {
+        return html`
+          <button class="btn" @click=${this.handleClick} >${this.count}</button>
+        `
+      }
+    }
+    customElements.define('my-counter', Counter)
+  </script>
+</html>

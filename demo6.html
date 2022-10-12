@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>模版和插槽</title>
+  </head>
+  <style>
+    .container {
+      background: red;
+    }
+  </style>
+  <body>
+    <user-card>
+      <span slot="uName">xiaoming</span>
+      <span slot="email">xiaoming.com</span>
+    </user-card>
+
+    <template id="userCardTemplate">
+      <style>
+        .wrapper {
+          display: flex;
+        }
+
+        .container {
+          margin-left: 10px;
+        }
+
+        img {
+          width: 150px;
+        }
+      </style>
+      <script>
+        function follow() {
+          alert('关注成功')
+        }
+      </script>
+      <div class="wrapper">
+        <img
+          src="https://semantic-ui.com/images/avatar2/large/kristy.png"
+          class="image"
+        />
+        <div class="container">
+          <p class="name">
+            <slot name="uName">占位</slot>
+          </p>
+          <p class="email">
+            <slot name="email">占位</slot>
+          </p>
+          <button class="button" onclick="follow()">关注</button>
+        </div>
+      </div>
+    </template>
+  </body>
+  <script>
+    class UserCard extends HTMLElement {
+      constructor() {
+        super()
+        this.attachShadow({ mode: 'open' })
+        var templateElem = document.getElementById('userCardTemplate')
+        var content = templateElem.content.cloneNode(true)
+        this.shadowRoot.append(content)
+      }
+    }
+   
+    customElements.define('user-card', UserCard)
+  </script>
+</html>
