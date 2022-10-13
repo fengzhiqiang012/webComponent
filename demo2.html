@@ -24,7 +24,7 @@
     class UserCard extends HTMLElement {
       constructor () {
         super();
-        this.attachShadow({mode:'open'})
+        this.attachShadow({mode:'closed'})
         const elm = document.createElement('div');
         elm.textContent = 'Hello world';
         elm.id = 'container';
