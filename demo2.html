@@ -1,48 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<style>
-    body #container {
+  </head>
+  <style>
+    body div {
       color: #fff;
     }
   </style>
-<body>
-    <div>
-        <!--使用自定义标签-->
-        <user-card></user-card>
-        <user-card></user-card>
-      </div>
-</body>
+  <body>
+    <!--使用自定义标签-->
+    <user-card ></user-card>
+  </body>
 </html>
-  <script>
-    //  定义组件类
-    class UserCard extends HTMLElement {
-      constructor () {
-        super();
-        this.attachShadow({mode:'closed'})
-        const elm = document.createElement('div');
-        elm.textContent = 'Hello world';
-        elm.id = 'container';
-        elm.onclick = function () {
-          console.log('Custom elements')
-        }
-        const style = document.createElement('style');
-        style.textContent = `
+<script>
+
+  class UserCard extends HTMLElement {
+    constructor() {
+      super()
+      const shadowRoot = this.attachShadow({ mode: 'open' })
+      // const shadowRoot = this.attachShadow({ mode: 'closed' })
+      const elm = document.createElement('div')
+      elm.textContent = 'Hello world'
+      elm.onclick = function () {
+        console.log('Custom elements')
+      }
+      const style = document.createElement('style')
+      style.textContent = `
           body {
             background: red;
           }
-          #container {
+          div {
             color: blue
           }
+          // :host{
+          //   background-color:red;
+          //   display:block;
+          // }
+          // :host([ pink ]){
+          //   display:block;
+          //   background-color:pink
+          // }
+          // :host(.pink){
+          //   display:block;
+          //   background-color:pink
+          // }
+          // :host(:not(.pink)){
+          //   display:block;
+          //   background-color:green
+          // }
         `
-        this.shadowRoot.append(elm, style)
-      }
+      shadowRoot.append(elm, style)
     }
-    // 注册组件
-    customElements.define('user-card', UserCard);
-  </script>
+  }
+  // 注册组件
+  customElements.define('user-card', UserCard)
+</script>

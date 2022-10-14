@@ -1,51 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<style>
-    body #container {
+  </head>
+  <style>
+    body div {
       color: #fff;
     }
   </style>
-<body>
-    <div>
-        <!--使用自定义标签-->
-        <user-card></user-card>
-        <user-card></user-card>
-      </div>
-</body>
+  <body>
+    <!--使用自定义标签-->
+    <user-card></user-card>
+  </body>
 </html>
-  <script>
-    /**
-     * 主文档中设置的字体颜色覆盖了组件中的字体颜色，组件中设置的 body 背景色会影响全局，组件和主文档样式相互影响。
-     * 组件 DOM 没有隔离，主文档中存在两个 ID 为 container 的元素。
-    */
-    //  定义组件类
-    class UserCard extends HTMLElement {
-      constructor () {
-        super();
-        const elm = document.createElement('div');
-        elm.textContent = 'Hello world';
-        elm.id = 'container';
-        elm.onclick = function () {
-          console.log('Custom elements')
-        }
-        const style = document.createElement('style');
-        style.textContent = `
+<script>
+  /**
+   * 主文档中设置的字体颜色覆盖了组件中的字体颜色，组件中设置的 body 背景色会影响全局，组件和主文档样式相互影响。
+   * 组件 DOM 没有隔离。
+   */
+  //  定义组件类
+  class UserCard extends HTMLElement {
+    constructor() {
+      super()
+      const elm = document.createElement('div')
+      elm.textContent = 'Hello world'
+      elm.onclick = function () {
+        console.log('Custom elements')
+      }
+      const style = document.createElement('style')
+      style.textContent = `
           body {
             background: red;
           }
-          #container {
+          div {
             color: blue
           }
         `
-        this.append(elm, style)
-      }
+      this.append(elm, style)
     }
-    // 注册组件
-    customElements.define('user-card', UserCard);
-  </script>
+  }
+  // 注册组件
+  customElements.define('user-card', UserCard)
+</script>

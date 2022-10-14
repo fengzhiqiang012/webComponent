@@ -21,7 +21,6 @@
         this.input.addEventListener('input', this.handleChange, false)
       }
       handleChange(e) {
-
         this.dispatchEvent(
           new CustomEvent('change', { bubbles: true, composed: true, detail:{value:e.target.value}}),
         )
