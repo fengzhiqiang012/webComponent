@@ -7,7 +7,7 @@
     <title>Document</title>
   </head>
   <style>
-    body div {
+    body #container {
       color: #fff;
     }
   </style>
@@ -17,15 +17,12 @@
   </body>
 </html>
 <script>
-  /**
-   * 主文档中设置的字体颜色覆盖了组件中的字体颜色，组件中设置的 body 背景色会影响全局，组件和主文档样式相互影响。
-   * 组件 DOM 没有隔离。
-   */
   //  定义组件类
   class UserCard extends HTMLElement {
     constructor() {
       super()
       const elm = document.createElement('div')
+      elm.id='container'
       elm.textContent = 'Hello world'
       elm.onclick = function () {
         console.log('Custom elements')
@@ -35,7 +32,7 @@
           body {
             background: red;
           }
-          div {
+          #container {
             color: blue
           }
         `

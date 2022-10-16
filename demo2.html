@@ -7,9 +7,10 @@
     <title>Document</title>
   </head>
   <style>
-    body div {
+      body #container {
       color: #fff;
     }
+   
   </style>
   <body>
     <!--使用自定义标签-->
@@ -21,9 +22,10 @@
   class UserCard extends HTMLElement {
     constructor() {
       super()
-      const shadowRoot = this.attachShadow({ mode: 'open' })
-      // const shadowRoot = this.attachShadow({ mode: 'closed' })
+      // const shadowRoot = this.attachShadow({ mode: 'open' })
+      const shadowRoot = this.attachShadow({ mode: 'closed' })
       const elm = document.createElement('div')
+      elm.id='container'
       elm.textContent = 'Hello world'
       elm.onclick = function () {
         console.log('Custom elements')
@@ -33,7 +35,7 @@
           body {
             background: red;
           }
-          div {
+          #container {
             color: blue
           }
           // :host{

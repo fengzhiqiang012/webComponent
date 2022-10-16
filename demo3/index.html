@@ -1,0 +1,60 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>钩子</title>
+  </head>
+  <body>
+   
+    <bfs-parent>
+      <bfs-children></bfs-children>
+    </bfs-parent>
+    <iframe src="./iframe.html" frameborder="0"></iframe>
+    <script>
+      class Parent extends HTMLElement {
+        connectedCallback() {
+          console.log(' Parent.connectedCallback')
+        }
+
+        disconnectedCallback() {
+          console.log('Parent.disconnectedCallback')
+        }
+
+        adoptedCallback() {
+          console.log('Parent 发生了移动')
+        }
+      }
+
+      class Children extends HTMLElement {
+        connectedCallback() {
+          console.log(' Children.connectedCallback')
+        }
+
+        disconnectedCallback() {
+          console.log('Children.disconnectedCallback')
+        }
+
+        adoptedCallback() {
+          console.log('Children 发生了移动')
+        }
+      }
+
+      customElements.define('bfs-parent', Parent)
+      customElements.define('bfs-children', Children)
+      
+     
+      const _bfsParent = document.querySelector('bfs-parent')
+      setTimeout(() => {
+        const _container = document
+          .querySelector('iframe')
+          .contentDocument.querySelector('body')
+        // 移动节点的本质就是
+        // 先从文档树中删除节点，但是不销毁
+        // 然后再插入到文档树中
+        // 只要没有销毁 重新调用 constructor 就是移动
+        _container.append(_bfsParent)
+      }, 3000)
+    </script>
+  </body>
+</html>
