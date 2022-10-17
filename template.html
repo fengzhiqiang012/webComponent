@@ -58,12 +58,22 @@
       constructor() {
         super()
         this.attachShadow({ mode: 'open' })
-        var templateElem = document.getElementById('userCardTemplate')
-        var content = templateElem.content.cloneNode(true)
-        this.shadowRoot.append(content)
+        // 获取 template 元素
+        const templateEle = document.querySelector('#userCardTemplate')
+        // 获取 template 元素包含的文档片段
+        // content 可以当做正常的 document 来使用
+        const content = templateEle.content
+        // 导入 node 到 当前文档
+        // 必须要有这一步
+        const cloneNode = document.importNode(content, true)
+        // 也可以使用 cloneNode
+        // const cloneNode = node.cloneNode(true);
+        // 追加节点到当前文档
+
+        this.shadowRoot.append(cloneNode)
       }
     }
-   
+
     customElements.define('user-card', UserCard)
   </script>
 </html>

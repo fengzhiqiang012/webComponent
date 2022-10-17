@@ -12,8 +12,12 @@
     }
   </style>
   <body>
+    <!-- <input type="text">
+    <video src="https://www.runoob.com/try/demo_source/movie.mp4"></video>
+    <select name="" id=""></select> -->
     <!--使用自定义标签-->
     <user-card></user-card>
+    <!-- <div is="user-card"></div> -->
   </body>
 </html>
 <script>
@@ -29,9 +33,9 @@
       }
       const style = document.createElement('style')
       style.textContent = `
-          body {
-            background: red;
-          }
+          // body {
+          //   background: red;
+          // }
           #container {
             color: blue
           }
@@ -41,4 +45,5 @@
   }
   // 注册组件
   customElements.define('user-card', UserCard)
+  // customElements.define('user-card', UserCard,{extends:'div'})
 </script>

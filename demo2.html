@@ -10,11 +10,12 @@
       body #container {
       color: #fff;
     }
-   
+  
   </style>
   <body>
     <!--使用自定义标签-->
-    <user-card ></user-card>
+    <user-card>插槽</user-card>
+ 
   </body>
 </html>
 <script>
@@ -22,14 +23,15 @@
   class UserCard extends HTMLElement {
     constructor() {
       super()
-      // const shadowRoot = this.attachShadow({ mode: 'open' })
-      const shadowRoot = this.attachShadow({ mode: 'closed' })
+      const shadowRoot = this.attachShadow({ mode: 'open' })
+      // const shadowRoot = this.attachShadow({ mode: 'closed' })
       const elm = document.createElement('div')
       elm.id='container'
       elm.textContent = 'Hello world'
       elm.onclick = function () {
         console.log('Custom elements')
       }
+      // elm.innerHTML=`<slot></slot>`
       const style = document.createElement('style')
       style.textContent = `
           body {
@@ -60,4 +62,5 @@
   }
   // 注册组件
   customElements.define('user-card', UserCard)
+  
 </script>
